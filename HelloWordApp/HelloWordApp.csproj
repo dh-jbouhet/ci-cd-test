@@ -5,6 +5,7 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\ci-cd-test</DockerfileContext>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
 

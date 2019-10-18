@@ -17,3 +17,7 @@ jobs:
       run: dotnet build --configuration Release
     - name: Unit Tests
       run: dotnet test
+    - name: Build NuGet Package
+      run: dotnet pack ./HelloWordApp\HelloWordApp.csproj --configuration Release -o NuGetPackages
+    - name: Deploy NuGet Package
+      run: dotnet nuget push ./NuGetPackages/HelloWordApp.1.0.0.nupkg -k $ -s https://api.nuget.org/v3/index.json
