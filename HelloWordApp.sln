@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.github\workflows\aspnetcore.yml = ..\.github\workflows\aspnetcore.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWordApp", "..\HelloWordApp\HelloWordApp.csproj", "{BED18539-8929-4F1E-86B2-6B91BA17F772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWordApp", "HelloWordApp\HelloWordApp.csproj", "{257676FF-2080-489A-8737-7F6C54AD908F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,16 +16,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BED18539-8929-4F1E-86B2-6B91BA17F772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BED18539-8929-4F1E-86B2-6B91BA17F772}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BED18539-8929-4F1E-86B2-6B91BA17F772}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BED18539-8929-4F1E-86B2-6B91BA17F772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{257676FF-2080-489A-8737-7F6C54AD908F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{257676FF-2080-489A-8737-7F6C54AD908F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{257676FF-2080-489A-8737-7F6C54AD908F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{257676FF-2080-489A-8737-7F6C54AD908F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{BED18539-8929-4F1E-86B2-6B91BA17F772} = {B280D56C-9733-4AD6-92FD-DEC160FFA2D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D67BB54-C382-4FDC-98F1-BAC35BC287C1}
