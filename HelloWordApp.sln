@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWordApp", "HelloWordApp.csproj", "{70B92DC7-9ECC-4424-8723-2CF16739045C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B280D56C-9733-4AD6-92FD-DEC160FFA2D1}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\aspnetcore.yml = ..\.github\workflows\aspnetcore.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWordApp", "..\HelloWordApp\HelloWordApp.csproj", "{BED18539-8929-4F1E-86B2-6B91BA17F772}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70B92DC7-9ECC-4424-8723-2CF16739045C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70B92DC7-9ECC-4424-8723-2CF16739045C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70B92DC7-9ECC-4424-8723-2CF16739045C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70B92DC7-9ECC-4424-8723-2CF16739045C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BED18539-8929-4F1E-86B2-6B91BA17F772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BED18539-8929-4F1E-86B2-6B91BA17F772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BED18539-8929-4F1E-86B2-6B91BA17F772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BED18539-8929-4F1E-86B2-6B91BA17F772}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BED18539-8929-4F1E-86B2-6B91BA17F772} = {B280D56C-9733-4AD6-92FD-DEC160FFA2D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D67BB54-C382-4FDC-98F1-BAC35BC287C1}
