@@ -28,11 +28,35 @@ steps:
   inputs:
     command: publish
     publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)\publish'
     zipAfterPublish: True
-
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-- task: PublishBuildArtifacts@1
+- task: OctopusPack@4
   inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'HelloWorldAppArtifact'
+    PackageId: 'HelloWorldApp'
+    PackageFormat: 'Zip'
+    PackageVersion: '$(Build.BuildNumber)'
+    SourcePath: '$(Build.ArtifactStagingDirectory)\publish'
+    OutputPath: '$(Build.ArtifactStagingDirectory)\package'
+- task: OctopusPush@4
+  inputs:
+    OctoConnectedServiceName: 'Octopus HelloWorldApp'
+    Space: 'Spaces-1'
+    Package: '$(Build.ArtifactStagingDirectory)\package\HelloWorldApp.$(Build.BuildNumber).zip'
+    Replace: 'true'
+- task: OctopusCreateRelease@4
+  inputs:
+    OctoConnectedServiceName: 'Octopus HelloWorldApp'
+    Space: 'Spaces-1'
+    ProjectName: 'Projects-1'
+- task: OctopusDeployRelease@4
+  inputs:
+    OctoConnectedServiceName: 'Octopus HelloWorldApp'
+    Space: 'Spaces-1'
+    Project: 'Projects-1'
+    ReleaseNumber: 'latest'
+    Environments: 'Environments-1'
+# # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+#     artifactName: 'HelloWorldAppArtifact'
