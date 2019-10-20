@@ -36,12 +36,12 @@ steps:
     PackageFormat: 'Zip'
     PackageVersion: '$(Build.BuildNumber)'
     SourcePath: '$(Build.ArtifactStagingDirectory)'
-    OutputPath: '$(Build.ArtifactStagingDirectory)\package'
+    OutputPath: '$(Build.ArtifactStagingDirectory)/package'
 - task: OctopusPush@4
   inputs:
     OctoConnectedServiceName: 'Octopus HelloWorldApp'
     Space: 'Spaces-1'
-    Package: '$(Build.ArtifactStagingDirectory)\package\HelloWorldApp.$(Build.BuildNumber).zip'
+    Package: '$(Build.ArtifactStagingDirectory)/package/HelloWorldApp.$(Build.BuildNumber).zip'
     Replace: 'true'
 - task: OctopusCreateRelease@4
   inputs:
