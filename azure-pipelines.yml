@@ -13,36 +13,48 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: Build
+- task: DownloadGitHubRelease@0
   inputs:
-    command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration Release' # Update this to match your need
-- task: DotNetCoreCLI@2
-  inputs:
-    command: test
-    projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: false
-    modifyOutputPath: false
+    connection: 'GitHub connection'
+    userRepository: 'dh-jbouhet/ci-cd-test'
+    defaultVersionType: 'latest'
+    downloadPath: '$(System.ArtifactsDirectory)'
 
-- task: GitHubRelease@1
+- task: Bash@3
   inputs:
-    gitHubConnection: 'GitHub connection'
-    repositoryName: '$(Build.Repository.Name)'
-    action: 'create'
-    target: '$(Build.SourceVersion)'
-    tagSource: 'userSpecifiedTag'
-    tag: '$(Build.BuildNumber)'
-    assets: '$(Build.ArtifactStagingDirectory)/*.dll'
-    changeLogCompareToRelease: 'lastFullRelease'
-    changeLogType: 'commitBased'
+    filePath: 'ls'
+    workingDirectory: '$(System.ArtifactsDirectory)'
+
+# - task: DotNetCoreCLI@2
+#   displayName: Build
+#   inputs:
+#     command: build
+#     projects: '**/*.csproj'
+#     arguments: '--configuration Release' # Update this to match your need
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: test
+#     projects: '**/*Tests/*.csproj'
+#     arguments: '--configuration $(buildConfiguration)'
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: 'publish'
+#     publishWebProjects: true
+#     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+#     zipAfterPublish: false
+#     modifyOutputPath: false
+
+# - task: GitHubRelease@1
+#   inputs:
+#     gitHubConnection: 'GitHub connection'
+#     repositoryName: '$(Build.Repository.Name)'
+#     action: 'create'
+#     target: '$(Build.SourceVersion)'
+#     tagSource: 'userSpecifiedTag'
+#     tag: '$(Build.BuildNumber)'
+#     assets: '$(Build.ArtifactStagingDirectory)/*.dll'
+#     changeLogCompareToRelease: 'lastFullRelease'
+#     changeLogType: 'commitBased'
 
 
     
