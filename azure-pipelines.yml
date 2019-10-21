@@ -31,19 +31,7 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: false
     modifyOutputPath: false
-- task: OctopusPack@4
-  inputs:
-    PackageId: 'HelloWorldApp'
-    PackageFormat: 'Zip'
-    PackageVersion: '$(Build.BuildNumber)'
-    SourcePath: '$(Build.ArtifactStagingDirectory)'
-    OutputPath: '$(Build.ArtifactStagingDirectory)/package'
-- task: OctopusPush@4
-  inputs:
-    OctoConnectedServiceName: 'Octopus HelloWorldApp'
-    Space: 'Spaces-1'
-    Package: '$(Build.ArtifactStagingDirectory)/package/HelloWorldApp.$(Build.BuildNumber).zip'
-    Replace: 'true'
+
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'GitHub connection'
@@ -52,7 +40,7 @@ steps:
     target: '$(Build.SourceVersion)'
     tagSource: 'userSpecifiedTag'
     tag: '$(Build.BuildNumber)'
-    assets: '$(Build.ArtifactStagingDirectory)/package/*'
+    assets: '$(Build.ArtifactStagingDirectory)/*.dll'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
 
