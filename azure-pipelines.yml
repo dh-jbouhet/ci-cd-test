@@ -30,6 +30,7 @@ steps:
     publishWebProjects: true
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: false
+    modifyOutputPath: false
 - task: OctopusPack@4
   inputs:
     PackageId: 'HelloWorldApp'
