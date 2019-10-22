@@ -22,7 +22,7 @@ steps:
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.ArtifactsDirectory)'
-    includeRootFolder: true
+    includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/static-$(Build.BuildId).zip'
     replaceExistingArchive: true
@@ -42,11 +42,16 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      echo here are the list of files
-       ls -l
+      echo $(System.ArtifactsDirectory)
+       ls -l $(System.ArtifactsDirectory)
       
-       echo  The number of files:
-       ls -l | wc -l
+      echo $(System.ArtifactStagingDirectory)
+       ls -l $(System.ArtifactStagingDirectory)
+      
+      echo $(Build.SourcesDirectory)
+       ls -l $(Build.SourcesDirectory)
+      
+       echo  End
     workingDirectory: '$(Build.ArtifactStagingDirectory)'
 
 # - task: DotNetCoreCLI@2
