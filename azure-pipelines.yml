@@ -38,6 +38,7 @@ steps:
       	exit 1
       }
       
+      Write-Host $Env:BUILD_ARTIFACTSTAGINGDIRECTORY
       $sourcePath = $Env:BUILD_ARTIFACTSTAGINGDIRECTORY + "/Front-release"
       #DEBUG: $path = "Front-release"
       
