@@ -38,23 +38,22 @@ steps:
       	exit 1
       }
       
-      Write-Host $Env:BUILD_ARTIFACTSTAGINGDIRECTORY
       $sourcePath = $Env:BUILD_ARTIFACTSTAGINGDIRECTORY + "/Front-release"
       #DEBUG: $path = "Front-release"
       
       $lastFrontReleaseFile = Get-ChildItem -Path $sourcePath -Force -Recurse -File | Select-Object -First 1
-      $lastFrontReleaseVersion = "front-" + $releaseFrontFile.Name.Replace("static-", "").Replace(".zip", "")
+      $lastFrontReleaseVersion = "front-" + $lastFrontReleaseFile.Name.Replace("static-", "").Replace(".zip", "")
       
       $currentBackVersion = "back-" + $Env:BUILD_BUILDNUMBER
       #DEBUG: $currentBackVersion = "back-20191107.9";
       
-      Write-Host "Front last release version: " + $lastReleaseFrontVersion
+      Write-Host "Front last release version: " + $lastFrontReleaseVersion
       Write-Host "Back last release version: " + $currentBackVersion 
       
       #$targetVersionFilePath = $Env:BUILD_ARTIFACTSTAGINGDIRECTORY + "/Publish/App/version.json"
       $targetVersionFilePath = "version.json"
       
-      Set-Content $targetVersionFilePath "{ front: '$lastReleaseFrontVersion', back: '$currentBackVersion ' }"
+      Set-Content $targetVersionFilePath "{ front: '$lastFrontReleaseVersion', back: '$currentBackVersion ' }"
       
       Get-Content $targetVersionFilePath
 
