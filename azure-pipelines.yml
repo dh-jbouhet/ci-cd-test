@@ -14,8 +14,46 @@ variables:
 
 steps:
 
-- task: UseDotNet@2
-  displayName: 'Install .NET Core 2 SDK for Octopus'
+- task: DownloadGitHubRelease@0
+  displayName: Download Front Last Release
   inputs:
-    packageType: 'runtime'
-    version: '2.x'
+    connection: 'GitHub Connection'
+    userRepository: 'datahawk-technologies/datahawk-front'
+    defaultVersionType: 'latest'
+    downloadPath: '$(Build.ArtifactStagingDirectory)/Front-release'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      if(-not ($Env:BUILD_BUILDNUMBER -and $Env:BUILD_ARTIFACTSTAGINGDIRECTORY))
+      {
+      	Write-Error "You must set the following environment variables to test this script interactively."
+      	Write-Host '$Env:BUILD_BUILDNUMBER - For example, enter something like:'
+      	Write-Host '$Env:BUILD_BUILDNUMBER = "20191107.6"'
+      	Write-Host '$Env:BUILD_ARTIFACTSTAGINGDIRECTORY - For example, enter something like:'
+      	Write-Host '$Env:BUILD_ARTIFACTSTAGINGDIRECTORY = "TestPath"'
+      	exit 1
+      }
+      
+      $sourcePath = $Env:BUILD_ARTIFACTSTAGINGDIRECTORY + "/Front-release"
+      #DEBUG: $path = "Front-release"
+      
+      $lastFrontReleaseFile = Get-ChildItem -Path $sourcePath -Force -Recurse -File | Select-Object -First 1
+      $lastFrontReleaseVersion = "front-" + $releaseFrontFile.Name.Replace("static-", "").Replace(".zip", "")
+      
+      $currentBackVersion = "back-" + $Env:BUILD_BUILDNUMBER
+      #DEBUG: $currentBackVersion = "back-20191107.9";
+      
+      Write-Host "Front last release version: " + $lastReleaseFrontVersion
+      Write-Host "Back last release version: " + $currentBackVersion 
+      
+      #$targetVersionFilePath = $Env:BUILD_ARTIFACTSTAGINGDIRECTORY + "/Publish/App/version.json"
+      $targetVersionFilePath = "version.json"
+      
+      Set-Content $targetVersionFilePath "{ front: '$lastReleaseFrontVersion', back: '$currentBackVersion ' }"
+      
+      Get-Content $targetVersionFilePath
+
